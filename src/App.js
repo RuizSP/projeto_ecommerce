@@ -32,7 +32,7 @@ function App() {
         conteudo: "125g",
         nomeProduto: "Geleia de Amora",
         totalEstoque: 5,
-        descricao: "Um monte de bosta",
+        descricao: "Um monte de gostosura",
         categorias: ["geleia", "doce", "sobremesa"],
         ingredientes: ["Açucar","Sal", "Amora"]
     },
@@ -43,7 +43,7 @@ function App() {
         conteudo: "60g", 
         nomeProduto: "Geleia de Abacaxi",
         totalEstoque: 5,
-        descricao: "Um monte de bosta",
+        descricao: "Um monte de gostosura",
         categorias: ["geleia", "doce", "sobremesa"],
         ingredientes: ["Açucar","Sal", "Amora"]
     }
