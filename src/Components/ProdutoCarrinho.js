@@ -2,7 +2,7 @@ function ProdutoCarrinho({produto, removerProdutoCarrinho}){
     return (
         <div className="card mb-2">
             <div className="card-body d-flex flex-wrap align-items-center w-sm">
-                <img  className="me-2 img-thumbnail w-25 h-25" src={produto.caminhoImagem} alt={produto.nomeProduto}/>
+                <img  className="me-2 img-thumbnail w-25 h-25" src={produto.caminhoImagem[0]} alt={produto.nomeProduto}/>
                 <strong className="me-2">{produto.nomeProduto}</strong><small className="me-2">{produto.conteudo}</small>
                 <input 
                     readOnly={true}

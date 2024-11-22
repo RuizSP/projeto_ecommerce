@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import BtnAdicionarCarrinho from "../BtnAdicionarCarrinho";
+import ControleQuantidade from "../ControleQuantidade";
 
-const PaginaProduto = () => {
+const PaginaProduto = ({adicionarAoCarrinho}) => {
   const location = useLocation();
   var produto = location.state?.produto;
   
+  const [quantidade, setQuantidade] = useState(1);
+
+  const adicionarProduto = () =>{
+      let produtoComQuantidade = {...produto, quantidade};
+
+      adicionarAoCarrinho(produtoComQuantidade);
+  }
+
     return (
     <div className="container mt-5">
       <div className="row">
@@ -14,16 +24,16 @@ const PaginaProduto = () => {
           <div className="d-flex flex-column">
             <div className="mb-3">
               <img
-                src={produto.caminhoImagem}
+                src={produto.caminhoImagem[0]}
                 alt="Main Product"
-                className="img-fluid border"
+                className="img-fluid border w-50"
               />
             </div>
             <div className="d-flex">
-              {[1, 2, 3, 4].map((_, idx) => (
+              {produto.caminhoImagem.map((imagem, idx) => (
                 <img
                   key={idx}
-                  src="https://via.placeholder.com/100"
+                  src= {imagem}
                   alt={`Thumbnail ${idx + 1}`}
                   className="img-thumbnail me-2"
                   style={{ width: "80px", height: "80px" }}
@@ -36,7 +46,16 @@ const PaginaProduto = () => {
         {/* Right Column - Product Details */}
         <div className="col-md-6">
           <h1 className="h4">{produto?.nomeProduto} {produto.conteudo}</h1>
-          <p className="text-muted">Category: Snacks</p>
+          <p className="text-muted">Categoria:</p>
+          <ul className="list-group list-inline">
+            {
+              produto.categorias.map((categoria, idx)=>{
+                return(
+                  <li  className="list-group-item" key={idx}>{categoria}</li>
+                )
+              })
+            }
+          </ul>
 
           <div className="mb-3">
             <span className="text-danger me-2">
@@ -48,37 +67,16 @@ const PaginaProduto = () => {
             <strong>Ingredientes:</strong>
             <ul>
               {
-                produto.ingredientes?.map((ingrediente)=>{
+                produto.ingredientes?.map((ingrediente, idx)=>{
                     return(
-                        <li>{ingrediente}</li>
+                        <li key={idx}>{ingrediente}</li>
                     )
                 })
               }
             </ul>
           </div>
-
-          <div className="mb-4">
-            <label htmlFor="quantity" className="form-label">
-              Quantidade:
-            </label>
-            <div className="d-flex align-items-center">
-              <button className="btn btn-outline-secondary">-</button>
-              <input
-                id="quantity"
-                type="number"
-                className="form-control mx-2 text-center"
-                style={{ width: "70px" }}
-                defaultValue={1}
-                min={1}
-              />
-              <button className="btn btn-outline-secondary">+</button>
-            </div>
-          </div>
-
-          <button className="btn btn-success w-100">
-            <i className="bi bi-cart-plus-fill p-2"></i>
-            Carrinho
-          </button>
+              <ControleQuantidade produto={produto} quantidade={quantidade} setQuantidade={setQuantidade}/>
+              <BtnAdicionarCarrinho adicionarProduto={adicionarProduto}/>
         </div>
       </div>
 
