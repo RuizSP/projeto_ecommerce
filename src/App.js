@@ -101,6 +101,8 @@ function App() {
       <section>
         <Routes>
           <Route path="/" element = {<Home produtos={produtos} adicionarAoCarrinho={adicionarAoCarrinho}/>}/>
+          <Route path='/Geleias' element= {<Geleias/>}/>
+          <Route path='/Licores' element= {<Licores/>}/>
           <Route path="/Compra" element={<Compra produtos={produtoCarrinho} removerProduto={removerProdutoCarrinho}/>} />
           <Route path='/Produto' element={<PaginaProduto adicionarAoCarrinho={adicionarAoCarrinho}/>}/>
         </Routes>
