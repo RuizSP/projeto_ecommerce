@@ -24,17 +24,17 @@ const PaginaProduto = ({adicionarAoCarrinho}) => {
           <div className="d-flex flex-column">
             <div className="mb-3">
               <img
-                src={produto.caminhoImagem[0]}
+                src={produto.caminhoImagem[0].url}
                 alt="Main Product"
                 className="img-fluid border w-50"
               />
             </div>
             <div className="d-flex">
-              {produto.caminhoImagem.map((imagem, idx) => (
+              {produto.caminhoImagem.map((imagem) => (
                 <img
-                  key={idx}
-                  src= {imagem}
-                  alt={`Thumbnail ${idx + 1}`}
+                  key={imagem.id}
+                  src= {imagem.url}
+                  alt={`Thumbnail ${imagem.id}`}
                   className="img-thumbnail me-2"
                   style={{ width: "80px", height: "80px" }}
                 />

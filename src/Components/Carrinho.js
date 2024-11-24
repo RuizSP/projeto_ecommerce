@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function Carrinho({ produtosIniciais = [], removerProdutoCarrinho }) {
     const [produtos, setProdutos] = useState(produtosIniciais);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         setProdutos(produtosIniciais);
     }, [produtosIniciais]);

@@ -21,7 +21,7 @@ function ProdutoCartao({produto, adicionarAoCarrinho }) {
         <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <div className="card border-primary shadow-sm">
                 <img 
-                    src={produto?.caminhoImagem[0]} 
+                    src={produto?.caminhoImagem[0].url} 
                     alt={produto?.nomeProduto} 
                     className="card-img-top" 
                     style={{ height: '200px', objectFit: 'cover' }} 

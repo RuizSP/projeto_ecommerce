@@ -13,42 +13,32 @@ import Compra from './Components/Pages/Compra';
 
 import Cookies from 'js-cookie';
 import PaginaProduto from './Components/Pages/PaginaProduto';
+import fetchApi from './backendConfig/fetchApi';
 
 function App() {
-  const [produtoCarrinho, setProdutoCarrinho] = useState([]);
+  const [produtos, setProdutos] = useState([]);
+
+  useEffect(()=>{
+    const carregarProdutos = async () =>{
+      const data = await fetchApi();
+      if(data){
+        setProdutos(data);
+      }
+    };
+    carregarProdutos()
+  }, []);
   
+  console.log(produtos);
+
+
+  const [produtoCarrinho, setProdutoCarrinho] = useState([]);
+
   useEffect(()=>{
     const carrinhoCookie = Cookies.get('carrinho');
     if(carrinhoCookie){
       setProdutoCarrinho(JSON.parse(carrinhoCookie));
     }
   }, []);
-
-  const produtos = [
-    {   
-        id: 1, 
-        caminhoImagem: ["https://casalacteos.com.br/wp-content/uploads/2020/02/Geleia-de-Amora-980x1114.jpg", "https://casalacteos.com.br/wp-content/uploads/2020/02/Geleia-de-Amora-980x1114.jpg", "https://casalacteos.com.br/wp-content/uploads/2020/02/Geleia-de-Amora-980x1114.jpg","https://casalacteos.com.br/wp-content/uploads/2020/02/Geleia-de-Amora-980x1114.jpg" ],
-        precoProduto: 25, 
-        conteudo: "125g",
-        nomeProduto: "Geleia de Amora",
-        totalEstoque: 5,
-        descricao: "Um monte de gostosura",
-        categorias: ["geleia", "doce", "sobremesa"],
-        ingredientes: ["Açucar","Sal", "Amora"]
-    },
-    {   
-        id: 2, 
-        caminhoImagem: ["https://casalacteos.com.br/wp-content/uploads/2020/02/Geleia-de-Amora-980x1114.jpg", "https://casalacteos.com.br/wp-content/uploads/2020/02/Geleia-de-Amora-980x1114.jpg", "https://casalacteos.com.br/wp-content/uploads/2020/02/Geleia-de-Amora-980x1114.jpg","https://casalacteos.com.br/wp-content/uploads/2020/02/Geleia-de-Amora-980x1114.jpg" ],
-        precoProduto: 10,
-        conteudo: "60g", 
-        nomeProduto: "Geleia de Abacaxi",
-        totalEstoque: 5,
-        descricao: "Um monte de gostosura",
-        categorias: ["geleia", "doce", "sobremesa"],
-        ingredientes: ["Açucar","Sal", "Amora"]
-    }
-  ]; 
-  
   
   const adicionarAoCarrinho = (produto) => {
     const produtoExistente = produtoCarrinho.find(item => item.id === produto.id);
